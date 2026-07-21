@@ -7,23 +7,26 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 moveInput;
 
-    private Animator animator;
+    
+
+
+    //Pega o movimento do personagem para mandar para a classe de anime.
+    public Vector2 _moveInput
+    {
+        get { return this.moveInput; }
+        set { this.moveInput = value;}
+    }
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         rb.linearVelocity = moveInput * movementSpeed;
-        if (rb.linearVelocity != Vector2.zero){
-            animator.SetInteger("transicao", 1);
-        }else{
-            animator.SetInteger("transicao", 0);
-        }
     }
 
     public void Move(InputAction.CallbackContext context)
