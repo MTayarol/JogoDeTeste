@@ -2903,7 +2903,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 40241213c1999b14696b5dc4dc23f0f1, type: 2}
   - serializedVersion: 2
     m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: 6b260d0b85b1fab418231c1230af1244, type: 2}
+    m_Data: {fileID: 11400000, guid: 1cf3fc78f5b86cf4dab7ff5d06d1a705, type: 2}
   m_TileSpriteArray:
   - serializedVersion: 2
     m_RefCount: 1
@@ -3589,6 +3589,9 @@ Tilemap:
   - serializedVersion: 2
     m_RefCount: 220
     m_Data: {r: 1, g: 1, b: 1, a: 1}
+  - serializedVersion: 2
+    m_RefCount: 0
+    m_Data: {r: 0.73256207, g: 0.43843237, b: 0.44017684, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3714,7 +3717,7 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
---- !u!114 &124453769323896203
+--- !u!114 &1211504979869516552
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
