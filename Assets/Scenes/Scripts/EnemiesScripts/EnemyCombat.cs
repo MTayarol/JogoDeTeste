@@ -11,4 +11,9 @@ public class EnemyCombat : MonoBehaviour
         }
         
     }
+
+    public void Attack()
+    {
+        
+    }
 }

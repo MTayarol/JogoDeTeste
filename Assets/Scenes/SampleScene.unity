@@ -2858,6 +2858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   speed: 3
+  attackRange: 2
 --- !u!58 &1170337481
 CircleCollider2D:
   m_ObjectHideFlags: 0

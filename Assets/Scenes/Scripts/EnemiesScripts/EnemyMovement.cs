@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-//Parei nos 3:10 do vídeo de ataque.
+//Parei nos 6:10 do vídeo de ataque. AINDA TENHO UM BUG QUE ELE ATACA SÓ UMA VEZ E É ISSO
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -35,7 +35,7 @@ public class EnemyMovement : MonoBehaviour
         else if(enemyState == EnemyState.Attacking)
         {
             //Ataque
-
+            rb.linearVelocity = Vector2.zero;
         }
     }
 
