@@ -1,8 +1,6 @@
 using UnityEngine;
 
-
-//Parei nos 6:10 do vídeo de ataque. AINDA TENHO UM BUG QUE ELE ATACA SÓ UMA VEZ E É ISSO
-
+//Parei nos 6:10 do vídeo de ataque. AINDA TENHO UM BUG QUE ELE ATACA SÓ UMA VEZ E É
 public class EnemyMovement : MonoBehaviour
 {
 
@@ -114,7 +112,6 @@ public enum EnemyState
     Attacking
 
 }
-
 
 /*
 if (rb.linearVelocity.x > 0.1f)
