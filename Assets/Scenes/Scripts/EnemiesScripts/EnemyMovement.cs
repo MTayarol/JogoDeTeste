@@ -8,8 +8,8 @@ public class EnemyMovement : MonoBehaviour
     public float attackRange = 2; 
 
     private int facingDirection = 1;
-    private EnemyState enemyState;
 
+    private EnemyState enemyState;
     private Rigidbody2D rb;
     private Transform player;
     private Animator anim;
@@ -34,6 +34,7 @@ public class EnemyMovement : MonoBehaviour
         {
             //Ataque
             rb.linearVelocity = Vector2.zero;
+            ChangeState(EnemyState.Attacking);
         }
     }
 
@@ -59,7 +60,7 @@ public class EnemyMovement : MonoBehaviour
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
@@ -67,8 +68,12 @@ public class EnemyMovement : MonoBehaviour
             {
                 player = collision.transform;
             }   
+
+            //mudanças aqui: 
+            if(Vector2.Distance(transform.position,player.transform.position) >= attackRange)
             ChangeState(EnemyState.Chasing);
         }
+        
         
     }
 
