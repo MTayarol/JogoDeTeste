@@ -3,16 +3,32 @@ using UnityEngine;
 //Parei nos 6:10 do vídeo de ataque. AINDA TENHO UM BUG QUE ELE ATACA SÓ UMA VEZ E É
 public class EnemyMovement : MonoBehaviour
 {
+    //Variáveis float
 
     public float speed;
     public float attackRange = 2; 
+    public float attackCooldown = 2f;
+    public float attackCooldownTimer;
+    public float playerDetectRange = 5;
+    //Variáveis inteiras
 
     private int facingDirection = 1;
 
+    //EnemyStates.
     private EnemyState enemyState;
+
+    //RigidBodys
     private Rigidbody2D rb;
+
+    //Transforms.
     private Transform player;
+    Transform detectPoint;
+
+    //Animators.
     private Animator anim;
+
+    //LayerMask
+    LayerMask playerLayer;
 
     void Start()
     {
@@ -26,6 +42,13 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckForPlayer();
+        if(attackCooldownTimer >= 0)
+        {
+            attackCooldownTimer-= Time.deltaTime;
+        }
+
+
         if (enemyState == EnemyState.Chasing)
         {
             Chase();
@@ -40,7 +63,8 @@ public class EnemyMovement : MonoBehaviour
 
     void Chase()
     {
-        if (Vector2.Distance(transform.position, player.transform.position) <= attackRange)
+        attackCooldownTimer = attackCooldown;
+        if (Vector2.Distance(transform.position, player.transform.position) <= attackRange && attackCooldownTimer <= 0)
         {
             ChangeState(EnemyState.Attacking);
         }
@@ -60,8 +84,9 @@ public class EnemyMovement : MonoBehaviour
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void CheckForPlayer()
     {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(detectPoint.position, attackRange, playerLayer);
         if(collision.gameObject.tag == "Player")
         {
             if(player == null)
