@@ -7,8 +7,8 @@ public class EnemyMovement : MonoBehaviour
 
     public float speed;
     public float attackRange = 2; 
-    public float attackCooldown = 2f;
-    public float attackCooldownTimer;
+    public float attackCooldown = 2;
+    private float attackCooldownTimer;
     public float playerDetectRange = 5;
     //Variáveis inteiras
 
@@ -22,30 +22,29 @@ public class EnemyMovement : MonoBehaviour
 
     //Transforms.
     private Transform player;
-    Transform detectPoint;
+    public Transform detectPoint;
 
     //Animators.
     private Animator anim;
 
     //LayerMask
-    LayerMask playerLayer;
+    public LayerMask playerLayer;
 
     void Start()
     {
         //Inicia os componentes padrão do Unity
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        ChangeState(EnemyState.Idle); 
-
+        ChangeState(EnemyState.Idle);
     }
 
     // Update is called once per frame
     void Update()
     {
         CheckForPlayer();
-        if(attackCooldownTimer >= 0)
+        if(attackCooldownTimer > 0)
         {
-            attackCooldownTimer-= Time.deltaTime;
+            attackCooldownTimer -= Time.deltaTime;
         }
 
 
@@ -63,11 +62,7 @@ public class EnemyMovement : MonoBehaviour
 
     void Chase()
     {
-        attackCooldownTimer = attackCooldown;
-        if (Vector2.Distance(transform.position, player.transform.position) <= attackRange && attackCooldownTimer <= 0)
-        {
-            ChangeState(EnemyState.Attacking);
-        }
+
         //Caso a posição do player seja maior que a posição do inimigo e ele esteja virando para o lado contrário, FLIP
         if(player.position.x > transform.position.x && facingDirection == -1 ||
             player.position.x < transform.position.x && facingDirection == 1)
@@ -86,25 +81,25 @@ public class EnemyMovement : MonoBehaviour
 
     private void CheckForPlayer()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(detectPoint.position, attackRange, playerLayer);
-        if(collision.gameObject.tag == "Player")
-        {
-            if(player == null)
-            {
-                player = collision.transform;
-            }   
+        Collider2D[] hits = Physics2D.OverlapCircleAll(detectPoint.position, playerDetectRange, playerLayer); 
 
-            //mudanças aqui: 
-            if(Vector2.Distance(transform.position,player.transform.position) >= attackRange)
-            ChangeState(EnemyState.Chasing);
+        if (hits.Length > 0)
+        {
+            player = hits[0].transform;
+
+            if (Vector2.Distance(transform.position, player.position) <= attackRange && attackCooldownTimer <= 0)
+            {
+                attackCooldownTimer = attackCooldown;
+                ChangeState(EnemyState.Attacking);
+            }
+
+            else if (Vector2.Distance(transform.position, player.position) > attackRange)   
+            {
+                ChangeState(EnemyState.Chasing);
+            }
         }
         
-        
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if(collision.gameObject.tag == "Player")
+        else
         {
             rb.linearVelocity = Vector2.zero;
             ChangeState(EnemyState.Idle);

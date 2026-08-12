@@ -2878,10 +2878,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyCombat
   damage: 1
   attackPoint: {fileID: 957286871}
-  weaponRange: 0
+  weaponRange: 2
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
 --- !u!114 &1170337480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2896,6 +2896,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   speed: 3
   attackRange: 2
+  attackCooldown: 2
+  attackCooldownTimer: 2
 --- !u!58 &1170337481
 CircleCollider2D:
   m_ObjectHideFlags: 0
