@@ -8,7 +8,7 @@ public class EnemyMovement : MonoBehaviour
     public float speed;
     public float attackRange = 2; 
     public float attackCooldown = 2;
-    
+
     private float attackCooldownTimer;
     public float playerDetectRange = 5;
     //Variáveis inteiras
@@ -129,8 +129,10 @@ public class EnemyMovement : MonoBehaviour
             anim.SetBool("isAttacking", true);
     }   
 
-    public void OnGizmosSelected()
+    public void OnDrawGizmosSelected()
     {
+        if (detectPoint == null) return;
+
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(detectPoint.position, playerDetectRange);
     }
