@@ -2500,6 +2500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   movementSpeed: 5
+  isKnockedBack: 0
 --- !u!114 &1169276532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2862,6 +2863,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 957286871}
+  - {fileID: 1938583121}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1170337479
@@ -2879,6 +2881,8 @@ MonoBehaviour:
   damage: 1
   attackPoint: {fileID: 957286871}
   weaponRange: 2
+  knockbackForce: 20
+  stunTime: 0.2
   playerLayer:
     serializedVersion: 2
     m_Bits: 1024
@@ -2897,7 +2901,11 @@ MonoBehaviour:
   speed: 3
   attackRange: 2
   attackCooldown: 2
-  attackCooldownTimer: 2
+  playerDetectRange: 5
+  detectPoint: {fileID: 1938583121}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!58 &1170337481
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3236,6 +3244,37 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1938583120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1938583121}
+  m_Layer: 0
+  m_Name: DetectPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1938583121
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938583120}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1170337478}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2097826924
 GameObject:
   m_ObjectHideFlags: 0

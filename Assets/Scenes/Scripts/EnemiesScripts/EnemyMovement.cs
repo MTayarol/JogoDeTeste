@@ -1,6 +1,6 @@
 using UnityEngine;
 
-//Parei nos 6:10 do vídeo de ataque. AINDA TENHO UM BUG QUE ELE ATACA SÓ UMA VEZ E É
+
 public class EnemyMovement : MonoBehaviour
 {
     //Variáveis float
@@ -11,6 +11,7 @@ public class EnemyMovement : MonoBehaviour
 
     private float attackCooldownTimer;
     public float playerDetectRange = 5;
+
     //Variáveis inteiras
 
     private int facingDirection = 1;
@@ -80,6 +81,7 @@ public class EnemyMovement : MonoBehaviour
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }
 
+
     private void CheckForPlayer()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(detectPoint.position, playerDetectRange, playerLayer); 
@@ -94,7 +96,7 @@ public class EnemyMovement : MonoBehaviour
                 ChangeState(EnemyState.Attacking);
             }
 
-            else if (Vector2.Distance(transform.position, player.position) > attackRange)   
+            else if (Vector2.Distance(transform.position, player.position) > attackRange && enemyState != EnemyState.Attacking)   
             {
                 ChangeState(EnemyState.Chasing);
             }
