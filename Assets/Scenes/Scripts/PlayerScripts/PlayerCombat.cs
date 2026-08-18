@@ -5,7 +5,7 @@ public class PlayerCombat : MonoBehaviour
 {
 
     private Animator anim;
-    private int comboStep = 0;
+    public int comboStep = 0;
     private float lastClickTime = 0f;
     private float maxComboDelay = 0.8f;
 
@@ -43,6 +43,10 @@ public class PlayerCombat : MonoBehaviour
             comboStep = 2;
             lastClickTime = Time.time;
             anim.SetTrigger("Ataque2");
+        }
+        else
+        {
+            ResetCombo();
         }
     }
 

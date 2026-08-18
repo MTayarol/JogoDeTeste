@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float movementSpeed = 5f;
     private Rigidbody2D rb;
     private Vector2 moveInput;
+    private PlayerCombat combat;
 
     public bool isKnockedBack;
 
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        combat = GetComponent<PlayerCombat>();
     }
 
     // Update is called once per frame
@@ -29,6 +31,12 @@ public class PlayerMovement : MonoBehaviour
         if (isKnockedBack == false)
         {
             rb.linearVelocity = moveInput * movementSpeed;
+        }
+
+        if (combat != null && combat.comboStep > 0)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
         }
     
     }
