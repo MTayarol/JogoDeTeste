@@ -1,4 +1,4 @@
-using UnityEngine;
+    using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 
@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float movementSpeed = 5f;
     private Rigidbody2D rb;
     private Vector2 moveInput;
-    private PlayerCombat combat;
+    [SerializeField] private PlayerCombat playerCombat;
 
     public bool isKnockedBack;
 
@@ -22,18 +22,25 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        combat = GetComponent<PlayerCombat>();
     }
 
-    // Update is called once per frame
     void Update()
+    {
+        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            Debug.Log("Clique detectado");
+            playerCombat.Attack();
+        }
+    }
+    // Update is called once per frame
+    void FixedUpdate()
     {
         if (isKnockedBack == false)
         {
             rb.linearVelocity = moveInput * movementSpeed;
         }
 
-        if (combat != null && combat.comboStep > 0)
+        if (playerCombat != null && playerCombat.comboStep > 0)
         {
             rb.linearVelocity = Vector2.zero;
             return;

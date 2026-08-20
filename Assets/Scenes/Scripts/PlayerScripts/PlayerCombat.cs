@@ -6,8 +6,9 @@ public class PlayerCombat : MonoBehaviour
 
     private Animator anim;
     public int comboStep = 0;
+    public bool isAttacking = false;
     private float lastClickTime = 0f;
-    private float maxComboDelay = 0.8f;
+    [SerializeField] private float maxComboDelay = 0.8f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,19 +16,19 @@ public class PlayerCombat : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    
+    
+    public void Update()
     {
-        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            Debug.Log("Clique detectado");
-            ProcessAttackCombo();
-        }
-
         if (comboStep > 0 && Time.time - lastClickTime > maxComboDelay)
         {
             ResetCombo();
         }
+    }
+
+    public void Attack()
+    {
+        ProcessAttackCombo();
     }
 
     void ProcessAttackCombo()
@@ -53,6 +54,12 @@ public class PlayerCombat : MonoBehaviour
     public void ResetCombo()
     {
         comboStep = 0;
+        isAttacking = false;
+    }
+
+    public void FinishingAttack()
+    {
+        anim.SetBool("isAttacking", false);
     }
 
 }

@@ -2377,6 +2377,7 @@ GameObject:
   - component: {fileID: 1169276531}
   - component: {fileID: 1169276534}
   - component: {fileID: 1169276536}
+  - component: {fileID: 1169276537}
   - component: {fileID: 1169276533}
   - component: {fileID: 1169276535}
   m_Layer: 10
@@ -2681,6 +2682,19 @@ MonoBehaviour:
   currentHealth: 3
   maxHealth: 3
   healthText: {fileID: 836450341}
+--- !u!114 &1169276537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169276527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2a401c5c89d3ee429f526fa7e7ded89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
+  comboStep: 0
 --- !u!1 &1170337473
 GameObject:
   m_ObjectHideFlags: 0
