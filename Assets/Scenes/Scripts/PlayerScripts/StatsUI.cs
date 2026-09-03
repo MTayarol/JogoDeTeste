@@ -22,12 +22,14 @@ public class StatsUI : MonoBehaviour
             if(statsOpen == true)
             {
                 Time.timeScale = 1;
+                UpdateAllStats();
                 statsCanvas.alpha = 0;
                 statsOpen = false;
             }
             else
             {
                 Time.timeScale = 0;
+                UpdateAllStats();
                 statsCanvas.alpha = 1;
                 statsOpen = true;
             }

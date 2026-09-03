@@ -13,6 +13,7 @@ public class PlayerCombat : MonoBehaviour
     //Funções Unity:
     public Transform attackPoint;
     public LayerMask enemyLayer;
+    public StatsUI statsUi;
 
     //Bool:
     //Int:
@@ -40,15 +41,11 @@ public class PlayerCombat : MonoBehaviour
     
 
     public void Attack()
-    {
-
-        Debug.Log("ATTACK CHAMADO: " + Time.time);      
+    {     
         if (comboStep == 0 && timer > 0)
         return;
-
     
-        ProcessAttackCombo();
-        
+        ProcessAttackCombo();   
         
     }
 
@@ -81,6 +78,9 @@ public class PlayerCombat : MonoBehaviour
 
     public void DealDamage()
     {
+        StatsManager.Instance.damage += 1;
+        statsUi.UpdateDamage();
+        
         Collider2D [] enemies = Physics2D.OverlapCircleAll(attackPoint.position, StatsManager.Instance.weaponRange, enemyLayer);
 
         foreach (Collider2D enemy in enemies)
